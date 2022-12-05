@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_sms",
+  "info": {
+    "name": "sm",
+    "icon": "book-open"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

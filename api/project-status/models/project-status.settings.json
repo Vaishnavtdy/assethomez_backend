@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_statuses",
+  "info": {
+    "name": "project_status"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "properties": {
+      "via": "project_status",
+      "collection": "property"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/area-guides",
+      "handler": "area-guide.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/area-guides/count",
+      "handler": "area-guide.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/area-guides/:id",
+      "handler": "area-guide.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/area-guides",
+      "handler": "area-guide.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/area-guides/:id",
+      "handler": "area-guide.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/area-guides/:id",
+      "handler": "area-guide.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

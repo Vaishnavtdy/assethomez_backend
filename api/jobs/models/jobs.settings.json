@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "name": "jobs"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": [
+        "UAE",
+        "INDIA"
+      ],
+      "required": true
+    },
+    "job_type": {
+      "type": "enumeration",
+      "enum": [
+        "Full_time",
+        "Part_time"
+      ],
+      "required": true
+    },
+    "posted_on": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

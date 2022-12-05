@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "property_pages",
+  "info": {
+    "name": "property_page"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

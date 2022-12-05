@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enquiries",
+  "info": {
+    "name": "enquiries",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "home_type": {
+      "type": "string"
+    },
+    "salary_scale": {
+      "type": "string"
+    }
+  }
+}

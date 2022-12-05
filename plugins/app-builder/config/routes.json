@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "handler": "app-builder.index",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/build",
+      "handler": "app-builder.build",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

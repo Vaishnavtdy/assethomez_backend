@@ -1,0 +1,3803 @@
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type About {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  banner_image: UploadFile
+  banner_title: String!
+  tagline: String!
+  title: String!
+  image: UploadFile
+  heading: String!
+  description: String
+  image2: UploadFile
+  description2: String
+  teamtitle: String
+  teamdescription: String
+  meetourteam: [ComponentSectionsMeetourteam]
+  seo: ComponentSharedSeo
+  published_at: DateTime
+}
+
+input AboutInput {
+  banner_image: ID
+  banner_title: String!
+  tagline: String!
+  title: String!
+  image: ID
+  heading: String!
+  description: String
+  image2: ID
+  description2: String
+  teamtitle: String
+  teamdescription: String
+  meetourteam: [ComponentSectionsMeetourteamInput]
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editAboutInput {
+  banner_image: ID
+  banner_title: String
+  tagline: String
+  title: String
+  image: ID
+  heading: String
+  description: String
+  image2: ID
+  description2: String
+  teamtitle: String
+  teamdescription: String
+  meetourteam: [editComponentSectionsMeetourteamInput]
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updateAboutInput {
+  data: editAboutInput
+}
+
+type updateAboutPayload {
+  about: About
+}
+
+type deleteAboutPayload {
+  about: About
+}
+
+type AreaGuide {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String
+  image: UploadFile
+  slug: String!
+  full_description: String
+  published_at: DateTime
+  gallery(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  properties(sort: String, limit: Int, start: Int, where: JSON): [Property]
+}
+
+type AreaGuideConnection {
+  values: [AreaGuide]
+  groupBy: AreaGuideGroupBy
+  aggregate: AreaGuideAggregator
+}
+
+type AreaGuideAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AreaGuideGroupBy {
+  id: [AreaGuideConnectionId]
+  created_at: [AreaGuideConnectionCreated_at]
+  updated_at: [AreaGuideConnectionUpdated_at]
+  title: [AreaGuideConnectionTitle]
+  description: [AreaGuideConnectionDescription]
+  image: [AreaGuideConnectionImage]
+  slug: [AreaGuideConnectionSlug]
+  full_description: [AreaGuideConnectionFull_description]
+  published_at: [AreaGuideConnectionPublished_at]
+}
+
+type AreaGuideConnectionId {
+  key: ID
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionCreated_at {
+  key: DateTime
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionUpdated_at {
+  key: DateTime
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionTitle {
+  key: String
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionDescription {
+  key: String
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionImage {
+  key: ID
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionSlug {
+  key: String
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionFull_description {
+  key: String
+  connection: AreaGuideConnection
+}
+
+type AreaGuideConnectionPublished_at {
+  key: DateTime
+  connection: AreaGuideConnection
+}
+
+input AreaGuideInput {
+  title: String!
+  description: String
+  image: ID
+  slug: String!
+  gallery: [ID]
+  full_description: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editAreaGuideInput {
+  title: String
+  description: String
+  image: ID
+  slug: String
+  gallery: [ID]
+  full_description: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createAreaGuideInput {
+  data: AreaGuideInput
+}
+
+type createAreaGuidePayload {
+  areaGuide: AreaGuide
+}
+
+input updateAreaGuideInput {
+  where: InputID
+  data: editAreaGuideInput
+}
+
+type updateAreaGuidePayload {
+  areaGuide: AreaGuide
+}
+
+input deleteAreaGuideInput {
+  where: InputID
+}
+
+type deleteAreaGuidePayload {
+  areaGuide: AreaGuide
+}
+
+enum ENUM_ARTICLE_STATUS {
+  draft
+  published
+}
+
+type Article {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String!
+  content: String!
+  publishedAt: DateTime!
+  status: ENUM_ARTICLE_STATUS!
+  slug: String!
+  category: Category
+  image: UploadFile
+  author: Writer
+  seo: ComponentSharedSeo
+}
+
+type ArticleConnection {
+  values: [Article]
+  groupBy: ArticleGroupBy
+  aggregate: ArticleAggregator
+}
+
+type ArticleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ArticleGroupBy {
+  id: [ArticleConnectionId]
+  created_at: [ArticleConnectionCreated_at]
+  updated_at: [ArticleConnectionUpdated_at]
+  title: [ArticleConnectionTitle]
+  description: [ArticleConnectionDescription]
+  content: [ArticleConnectionContent]
+  publishedAt: [ArticleConnectionPublishedAt]
+  status: [ArticleConnectionStatus]
+  slug: [ArticleConnectionSlug]
+  category: [ArticleConnectionCategory]
+  image: [ArticleConnectionImage]
+  author: [ArticleConnectionAuthor]
+  seo: [ArticleConnectionSeo]
+}
+
+type ArticleConnectionId {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionCreated_at {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+type ArticleConnectionUpdated_at {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+type ArticleConnectionTitle {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionDescription {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionContent {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionPublishedAt {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+type ArticleConnectionStatus {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionSlug {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionCategory {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionImage {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionAuthor {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionSeo {
+  key: ID
+  connection: ArticleConnection
+}
+
+input ArticleInput {
+  title: String!
+  description: String!
+  content: String!
+  publishedAt: DateTime!
+  status: ENUM_ARTICLE_STATUS
+  slug: String!
+  category: ID
+  image: ID
+  author: ID
+  seo: ComponentSharedSeoInput
+  created_by: ID
+  updated_by: ID
+}
+
+input editArticleInput {
+  title: String
+  description: String
+  content: String
+  publishedAt: DateTime
+  status: ENUM_ARTICLE_STATUS
+  slug: String
+  category: ID
+  image: ID
+  author: ID
+  seo: editComponentSharedSeoInput
+  created_by: ID
+  updated_by: ID
+}
+
+input createArticleInput {
+  data: ArticleInput
+}
+
+type createArticlePayload {
+  article: Article
+}
+
+input updateArticleInput {
+  where: InputID
+  data: editArticleInput
+}
+
+type updateArticlePayload {
+  article: Article
+}
+
+input deleteArticleInput {
+  where: InputID
+}
+
+type deleteArticlePayload {
+  article: Article
+}
+
+type CareersListing {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  fullname: String!
+  email: String!
+  mobile: String!
+  country: String!
+  address: String!
+  school: String!
+  degree: String!
+  post_graduation: String
+  additional_certification: String
+  resume: UploadFile
+  published_at: DateTime
+}
+
+type CareersListingConnection {
+  values: [CareersListing]
+  groupBy: CareersListingGroupBy
+  aggregate: CareersListingAggregator
+}
+
+type CareersListingAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CareersListingGroupBy {
+  id: [CareersListingConnectionId]
+  created_at: [CareersListingConnectionCreated_at]
+  updated_at: [CareersListingConnectionUpdated_at]
+  fullname: [CareersListingConnectionFullname]
+  email: [CareersListingConnectionEmail]
+  mobile: [CareersListingConnectionMobile]
+  country: [CareersListingConnectionCountry]
+  address: [CareersListingConnectionAddress]
+  school: [CareersListingConnectionSchool]
+  degree: [CareersListingConnectionDegree]
+  post_graduation: [CareersListingConnectionPost_graduation]
+  additional_certification: [CareersListingConnectionAdditional_certification]
+  resume: [CareersListingConnectionResume]
+  published_at: [CareersListingConnectionPublished_at]
+}
+
+type CareersListingConnectionId {
+  key: ID
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionCreated_at {
+  key: DateTime
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionUpdated_at {
+  key: DateTime
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionFullname {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionEmail {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionMobile {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionCountry {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionAddress {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionSchool {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionDegree {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionPost_graduation {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionAdditional_certification {
+  key: String
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionResume {
+  key: ID
+  connection: CareersListingConnection
+}
+
+type CareersListingConnectionPublished_at {
+  key: DateTime
+  connection: CareersListingConnection
+}
+
+input CareersListingInput {
+  fullname: String!
+  email: String!
+  mobile: String!
+  country: String!
+  address: String!
+  school: String!
+  degree: String!
+  post_graduation: String
+  additional_certification: String
+  resume: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCareersListingInput {
+  fullname: String
+  email: String
+  mobile: String
+  country: String
+  address: String
+  school: String
+  degree: String
+  post_graduation: String
+  additional_certification: String
+  resume: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCareersListingInput {
+  data: CareersListingInput
+}
+
+type createCareersListingPayload {
+  careersListing: CareersListing
+}
+
+input updateCareersListingInput {
+  where: InputID
+  data: editCareersListingInput
+}
+
+type updateCareersListingPayload {
+  careersListing: CareersListing
+}
+
+input deleteCareersListingInput {
+  where: InputID
+}
+
+type deleteCareersListingPayload {
+  careersListing: CareersListing
+}
+
+type Careers {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String!
+  featurescard: [ComponentSectionsFeaturescard]
+  benefitstitle: String
+  benefitsdescription: String
+  benefitscard: [ComponentSectionsFeaturescard]
+  seo: ComponentSharedSeo
+  published_at: DateTime
+}
+
+input CareerInput {
+  title: String!
+  description: String!
+  featurescard: [ComponentSectionsFeaturescardInput]
+  benefitstitle: String
+  benefitsdescription: String
+  benefitscard: [ComponentSectionsFeaturescardInput]
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCareerInput {
+  title: String
+  description: String
+  featurescard: [editComponentSectionsFeaturescardInput]
+  benefitstitle: String
+  benefitsdescription: String
+  benefitscard: [editComponentSectionsFeaturescardInput]
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updateCareerInput {
+  data: editCareerInput
+}
+
+type updateCareerPayload {
+  career: Careers
+}
+
+type deleteCareerPayload {
+  career: Careers
+}
+
+type Category {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  slug: String!
+  articles(sort: String, limit: Int, start: Int, where: JSON): [Article]
+}
+
+type CategoryConnection {
+  values: [Category]
+  groupBy: CategoryGroupBy
+  aggregate: CategoryAggregator
+}
+
+type CategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CategoryGroupBy {
+  id: [CategoryConnectionId]
+  created_at: [CategoryConnectionCreated_at]
+  updated_at: [CategoryConnectionUpdated_at]
+  name: [CategoryConnectionName]
+  slug: [CategoryConnectionSlug]
+}
+
+type CategoryConnectionId {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionCreated_at {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionUpdated_at {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionName {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionSlug {
+  key: String
+  connection: CategoryConnection
+}
+
+input CategoryInput {
+  name: String!
+  slug: String!
+  articles: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editCategoryInput {
+  name: String
+  slug: String
+  articles: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createCategoryInput {
+  data: CategoryInput
+}
+
+type createCategoryPayload {
+  category: Category
+}
+
+input updateCategoryInput {
+  where: InputID
+  data: editCategoryInput
+}
+
+type updateCategoryPayload {
+  category: Category
+}
+
+input deleteCategoryInput {
+  where: InputID
+}
+
+type deleteCategoryPayload {
+  category: Category
+}
+
+type Contactus {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  full_name: String!
+  email: String!
+  mobile: String!
+  message: String
+  published_at: DateTime
+}
+
+type ContactusConnection {
+  values: [Contactus]
+  groupBy: ContactusGroupBy
+  aggregate: ContactusAggregator
+}
+
+type ContactusAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ContactusGroupBy {
+  id: [ContactusConnectionId]
+  created_at: [ContactusConnectionCreated_at]
+  updated_at: [ContactusConnectionUpdated_at]
+  full_name: [ContactusConnectionFull_name]
+  email: [ContactusConnectionEmail]
+  mobile: [ContactusConnectionMobile]
+  message: [ContactusConnectionMessage]
+  published_at: [ContactusConnectionPublished_at]
+}
+
+type ContactusConnectionId {
+  key: ID
+  connection: ContactusConnection
+}
+
+type ContactusConnectionCreated_at {
+  key: DateTime
+  connection: ContactusConnection
+}
+
+type ContactusConnectionUpdated_at {
+  key: DateTime
+  connection: ContactusConnection
+}
+
+type ContactusConnectionFull_name {
+  key: String
+  connection: ContactusConnection
+}
+
+type ContactusConnectionEmail {
+  key: String
+  connection: ContactusConnection
+}
+
+type ContactusConnectionMobile {
+  key: String
+  connection: ContactusConnection
+}
+
+type ContactusConnectionMessage {
+  key: String
+  connection: ContactusConnection
+}
+
+type ContactusConnectionPublished_at {
+  key: DateTime
+  connection: ContactusConnection
+}
+
+input ContactusInput {
+  full_name: String!
+  email: String!
+  mobile: String!
+  message: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editContactusInput {
+  full_name: String
+  email: String
+  mobile: String
+  message: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createContactusInput {
+  data: ContactusInput
+}
+
+type createContactusPayload {
+  contactus: Contactus
+}
+
+input updateContactusInput {
+  where: InputID
+  data: editContactusInput
+}
+
+type updateContactusPayload {
+  contactus: Contactus
+}
+
+input deleteContactusInput {
+  where: InputID
+}
+
+type deleteContactusPayload {
+  contactus: Contactus
+}
+
+type Enquiries {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  full_name: String
+  email: String
+  mobile: String
+  budget: String
+  city: String
+  home_type: String
+  salary_scale: String
+  published_at: DateTime
+}
+
+type EnquiriesConnection {
+  values: [Enquiries]
+  groupBy: EnquiriesGroupBy
+  aggregate: EnquiriesAggregator
+}
+
+type EnquiriesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type EnquiriesGroupBy {
+  id: [EnquiriesConnectionId]
+  created_at: [EnquiriesConnectionCreated_at]
+  updated_at: [EnquiriesConnectionUpdated_at]
+  full_name: [EnquiriesConnectionFull_name]
+  email: [EnquiriesConnectionEmail]
+  mobile: [EnquiriesConnectionMobile]
+  budget: [EnquiriesConnectionBudget]
+  city: [EnquiriesConnectionCity]
+  home_type: [EnquiriesConnectionHome_type]
+  salary_scale: [EnquiriesConnectionSalary_scale]
+  published_at: [EnquiriesConnectionPublished_at]
+}
+
+type EnquiriesConnectionId {
+  key: ID
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionCreated_at {
+  key: DateTime
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionUpdated_at {
+  key: DateTime
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionFull_name {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionEmail {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionMobile {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionBudget {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionCity {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionHome_type {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionSalary_scale {
+  key: String
+  connection: EnquiriesConnection
+}
+
+type EnquiriesConnectionPublished_at {
+  key: DateTime
+  connection: EnquiriesConnection
+}
+
+input EnquiryInput {
+  full_name: String
+  email: String
+  mobile: String
+  budget: String
+  city: String
+  home_type: String
+  salary_scale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editEnquiryInput {
+  full_name: String
+  email: String
+  mobile: String
+  budget: String
+  city: String
+  home_type: String
+  salary_scale: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createEnquiryInput {
+  data: EnquiryInput
+}
+
+type createEnquiryPayload {
+  enquiry: Enquiries
+}
+
+input updateEnquiryInput {
+  where: InputID
+  data: editEnquiryInput
+}
+
+type updateEnquiryPayload {
+  enquiry: Enquiries
+}
+
+input deleteEnquiryInput {
+  where: InputID
+}
+
+type deleteEnquiryPayload {
+  enquiry: Enquiries
+}
+
+type GalleryCategory {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  label: String!
+  slug: String!
+  published_at: DateTime
+  sub_categories(sort: String, limit: Int, start: Int, where: JSON): [SubCategory]
+}
+
+type GalleryCategoryConnection {
+  values: [GalleryCategory]
+  groupBy: GalleryCategoryGroupBy
+  aggregate: GalleryCategoryAggregator
+}
+
+type GalleryCategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryCategoryGroupBy {
+  id: [GalleryCategoryConnectionId]
+  created_at: [GalleryCategoryConnectionCreated_at]
+  updated_at: [GalleryCategoryConnectionUpdated_at]
+  label: [GalleryCategoryConnectionLabel]
+  slug: [GalleryCategoryConnectionSlug]
+  published_at: [GalleryCategoryConnectionPublished_at]
+}
+
+type GalleryCategoryConnectionId {
+  key: ID
+  connection: GalleryCategoryConnection
+}
+
+type GalleryCategoryConnectionCreated_at {
+  key: DateTime
+  connection: GalleryCategoryConnection
+}
+
+type GalleryCategoryConnectionUpdated_at {
+  key: DateTime
+  connection: GalleryCategoryConnection
+}
+
+type GalleryCategoryConnectionLabel {
+  key: String
+  connection: GalleryCategoryConnection
+}
+
+type GalleryCategoryConnectionSlug {
+  key: String
+  connection: GalleryCategoryConnection
+}
+
+type GalleryCategoryConnectionPublished_at {
+  key: DateTime
+  connection: GalleryCategoryConnection
+}
+
+input GalleryCategoryInput {
+  label: String!
+  slug: String!
+  sub_categories: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryCategoryInput {
+  label: String
+  slug: String
+  sub_categories: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryCategoryInput {
+  data: GalleryCategoryInput
+}
+
+type createGalleryCategoryPayload {
+  galleryCategory: GalleryCategory
+}
+
+input updateGalleryCategoryInput {
+  where: InputID
+  data: editGalleryCategoryInput
+}
+
+type updateGalleryCategoryPayload {
+  galleryCategory: GalleryCategory
+}
+
+input deleteGalleryCategoryInput {
+  where: InputID
+}
+
+type deleteGalleryCategoryPayload {
+  galleryCategory: GalleryCategory
+}
+
+type Gallery {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  label: String!
+  image: UploadFile
+  sub_category: SubCategory
+  published_at: DateTime
+}
+
+type GalleryConnection {
+  values: [Gallery]
+  groupBy: GalleryGroupBy
+  aggregate: GalleryAggregator
+}
+
+type GalleryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryGroupBy {
+  id: [GalleryConnectionId]
+  created_at: [GalleryConnectionCreated_at]
+  updated_at: [GalleryConnectionUpdated_at]
+  label: [GalleryConnectionLabel]
+  image: [GalleryConnectionImage]
+  sub_category: [GalleryConnectionSub_category]
+  published_at: [GalleryConnectionPublished_at]
+}
+
+type GalleryConnectionId {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnectionCreated_at {
+  key: DateTime
+  connection: GalleryConnection
+}
+
+type GalleryConnectionUpdated_at {
+  key: DateTime
+  connection: GalleryConnection
+}
+
+type GalleryConnectionLabel {
+  key: String
+  connection: GalleryConnection
+}
+
+type GalleryConnectionImage {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnectionSub_category {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnectionPublished_at {
+  key: DateTime
+  connection: GalleryConnection
+}
+
+input GalleryInput {
+  label: String!
+  image: ID
+  sub_category: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryInput {
+  label: String
+  image: ID
+  sub_category: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryInput {
+  data: GalleryInput
+}
+
+type createGalleryPayload {
+  gallery: Gallery
+}
+
+input updateGalleryInput {
+  where: InputID
+  data: editGalleryInput
+}
+
+type updateGalleryPayload {
+  gallery: Gallery
+}
+
+input deleteGalleryInput {
+  where: InputID
+}
+
+type deleteGalleryPayload {
+  gallery: Gallery
+}
+
+type Global {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  favicon: UploadFile
+  siteName: String!
+  defaultSeo: ComponentSharedSeo
+}
+
+input GlobalInput {
+  favicon: ID
+  siteName: String!
+  defaultSeo: ComponentSharedSeoInput!
+  created_by: ID
+  updated_by: ID
+}
+
+input editGlobalInput {
+  favicon: ID
+  siteName: String
+  defaultSeo: editComponentSharedSeoInput
+  created_by: ID
+  updated_by: ID
+}
+
+input updateGlobalInput {
+  data: editGlobalInput
+}
+
+type updateGlobalPayload {
+  global: Global
+}
+
+type deleteGlobalPayload {
+  global: Global
+}
+
+type Home {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slidertitle: String!
+  sliderdescription: String
+  email: String
+  phone: String
+  areaguide_title: String
+  about_title: String
+  about_description: String
+  aboutBtn_title: String
+  aboutBtn_link: String
+  about_image: UploadFile
+  service_title: String!
+  servicesBtn_title: String
+  servicesBtn_link: String
+  propertysale_tltle: String
+  propertysale_description: String
+  propertysaleBtn_title: String
+  propertysaleBtn_link: String
+  propertyrent_title: String
+  propertyrent_description: String
+  propertyrentBtn_title: String
+  propertyrentBtn_link: String
+  testimonial_title: String
+  testimonial: [ComponentSectionsTestimonial]
+  newstitle: String
+  newsBtn_title: String
+  newsBtn_link: String
+  mortgage_title: String
+  mortgageimage: UploadFile
+  consultation_title: String
+  consultation_image: UploadFile
+  offer_title: String
+  offer_image: UploadFile
+  currency_title: String
+  currency_image: UploadFile
+  feature_block: [ComponentSectionsFeatureBlock]
+  partners_title: String
+  sliderimage: UploadFile
+  seo: ComponentSharedSeo
+  published_at: DateTime
+  partners_logo(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+input HomeInput {
+  slidertitle: String!
+  sliderdescription: String
+  email: String
+  phone: String
+  areaguide_title: String
+  about_title: String
+  about_description: String
+  aboutBtn_title: String
+  aboutBtn_link: String
+  about_image: ID
+  service_title: String!
+  servicesBtn_title: String
+  servicesBtn_link: String
+  propertysale_tltle: String
+  propertysale_description: String
+  propertysaleBtn_title: String
+  propertysaleBtn_link: String
+  propertyrent_title: String
+  propertyrent_description: String
+  propertyrentBtn_title: String
+  propertyrentBtn_link: String
+  testimonial_title: String
+  testimonial: [ComponentSectionsTestimonialInput]
+  newstitle: String
+  newsBtn_title: String
+  newsBtn_link: String
+  mortgage_title: String
+  mortgageimage: ID
+  consultation_title: String
+  consultation_image: ID
+  offer_title: String
+  offer_image: ID
+  currency_title: String
+  currency_image: ID
+  feature_block: [ComponentSectionsFeatureBlockInput]
+  partners_title: String
+  partners_logo: [ID]
+  sliderimage: ID
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editHomeInput {
+  slidertitle: String
+  sliderdescription: String
+  email: String
+  phone: String
+  areaguide_title: String
+  about_title: String
+  about_description: String
+  aboutBtn_title: String
+  aboutBtn_link: String
+  about_image: ID
+  service_title: String
+  servicesBtn_title: String
+  servicesBtn_link: String
+  propertysale_tltle: String
+  propertysale_description: String
+  propertysaleBtn_title: String
+  propertysaleBtn_link: String
+  propertyrent_title: String
+  propertyrent_description: String
+  propertyrentBtn_title: String
+  propertyrentBtn_link: String
+  testimonial_title: String
+  testimonial: [editComponentSectionsTestimonialInput]
+  newstitle: String
+  newsBtn_title: String
+  newsBtn_link: String
+  mortgage_title: String
+  mortgageimage: ID
+  consultation_title: String
+  consultation_image: ID
+  offer_title: String
+  offer_image: ID
+  currency_title: String
+  currency_image: ID
+  feature_block: [editComponentSectionsFeatureBlockInput]
+  partners_title: String
+  partners_logo: [ID]
+  sliderimage: ID
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updateHomeInput {
+  data: editHomeInput
+}
+
+type updateHomePayload {
+  home: Home
+}
+
+type deleteHomePayload {
+  home: Home
+}
+
+type Homepage {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  seo: ComponentSharedSeo
+  hero: ComponentSectionsHero
+}
+
+input HomepageInput {
+  seo: ComponentSharedSeoInput
+  hero: ComponentSectionsHeroInput!
+  created_by: ID
+  updated_by: ID
+}
+
+input editHomepageInput {
+  seo: editComponentSharedSeoInput
+  hero: editComponentSectionsHeroInput
+  created_by: ID
+  updated_by: ID
+}
+
+input updateHomepageInput {
+  data: editHomepageInput
+}
+
+type updateHomepagePayload {
+  homepage: Homepage
+}
+
+type deleteHomepagePayload {
+  homepage: Homepage
+}
+
+enum ENUM_JOBS_LOCATION {
+  UAE
+  INDIA
+}
+
+enum ENUM_JOBS_JOB_TYPE {
+  Full_time
+  Part_time
+}
+
+type Jobs {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String
+  location: ENUM_JOBS_LOCATION!
+  job_type: ENUM_JOBS_JOB_TYPE!
+  posted_on: DateTime!
+  published_at: DateTime
+}
+
+type JobsConnection {
+  values: [Jobs]
+  groupBy: JobsGroupBy
+  aggregate: JobsAggregator
+}
+
+type JobsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type JobsGroupBy {
+  id: [JobsConnectionId]
+  created_at: [JobsConnectionCreated_at]
+  updated_at: [JobsConnectionUpdated_at]
+  title: [JobsConnectionTitle]
+  description: [JobsConnectionDescription]
+  location: [JobsConnectionLocation]
+  job_type: [JobsConnectionJob_type]
+  posted_on: [JobsConnectionPosted_on]
+  published_at: [JobsConnectionPublished_at]
+}
+
+type JobsConnectionId {
+  key: ID
+  connection: JobsConnection
+}
+
+type JobsConnectionCreated_at {
+  key: DateTime
+  connection: JobsConnection
+}
+
+type JobsConnectionUpdated_at {
+  key: DateTime
+  connection: JobsConnection
+}
+
+type JobsConnectionTitle {
+  key: String
+  connection: JobsConnection
+}
+
+type JobsConnectionDescription {
+  key: String
+  connection: JobsConnection
+}
+
+type JobsConnectionLocation {
+  key: String
+  connection: JobsConnection
+}
+
+type JobsConnectionJob_type {
+  key: String
+  connection: JobsConnection
+}
+
+type JobsConnectionPosted_on {
+  key: DateTime
+  connection: JobsConnection
+}
+
+type JobsConnectionPublished_at {
+  key: DateTime
+  connection: JobsConnection
+}
+
+input JobInput {
+  title: String!
+  description: String
+  location: ENUM_JOBS_LOCATION!
+  job_type: ENUM_JOBS_JOB_TYPE!
+  posted_on: DateTime!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editJobInput {
+  title: String
+  description: String
+  location: ENUM_JOBS_LOCATION
+  job_type: ENUM_JOBS_JOB_TYPE
+  posted_on: DateTime
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createJobInput {
+  data: JobInput
+}
+
+type createJobPayload {
+  job: Jobs
+}
+
+input updateJobInput {
+  where: InputID
+  data: editJobInput
+}
+
+type updateJobPayload {
+  job: Jobs
+}
+
+input deleteJobInput {
+  where: InputID
+}
+
+type deleteJobPayload {
+  job: Jobs
+}
+
+type Newsletter {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  email: String
+  published_at: DateTime
+}
+
+type NewsletterConnection {
+  values: [Newsletter]
+  groupBy: NewsletterGroupBy
+  aggregate: NewsletterAggregator
+}
+
+type NewsletterAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type NewsletterGroupBy {
+  id: [NewsletterConnectionId]
+  created_at: [NewsletterConnectionCreated_at]
+  updated_at: [NewsletterConnectionUpdated_at]
+  email: [NewsletterConnectionEmail]
+  published_at: [NewsletterConnectionPublished_at]
+}
+
+type NewsletterConnectionId {
+  key: ID
+  connection: NewsletterConnection
+}
+
+type NewsletterConnectionCreated_at {
+  key: DateTime
+  connection: NewsletterConnection
+}
+
+type NewsletterConnectionUpdated_at {
+  key: DateTime
+  connection: NewsletterConnection
+}
+
+type NewsletterConnectionEmail {
+  key: String
+  connection: NewsletterConnection
+}
+
+type NewsletterConnectionPublished_at {
+  key: DateTime
+  connection: NewsletterConnection
+}
+
+input NewsletterInput {
+  email: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editNewsletterInput {
+  email: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createNewsletterInput {
+  data: NewsletterInput
+}
+
+type createNewsletterPayload {
+  newsletter: Newsletter
+}
+
+input updateNewsletterInput {
+  where: InputID
+  data: editNewsletterInput
+}
+
+type updateNewsletterPayload {
+  newsletter: Newsletter
+}
+
+input deleteNewsletterInput {
+  where: InputID
+}
+
+type deleteNewsletterPayload {
+  newsletter: Newsletter
+}
+
+type ProjectStatus {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  slug: String
+  published_at: DateTime
+  properties(sort: String, limit: Int, start: Int, where: JSON): [Property]
+}
+
+type ProjectStatusConnection {
+  values: [ProjectStatus]
+  groupBy: ProjectStatusGroupBy
+  aggregate: ProjectStatusAggregator
+}
+
+type ProjectStatusAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ProjectStatusGroupBy {
+  id: [ProjectStatusConnectionId]
+  created_at: [ProjectStatusConnectionCreated_at]
+  updated_at: [ProjectStatusConnectionUpdated_at]
+  name: [ProjectStatusConnectionName]
+  slug: [ProjectStatusConnectionSlug]
+  published_at: [ProjectStatusConnectionPublished_at]
+}
+
+type ProjectStatusConnectionId {
+  key: ID
+  connection: ProjectStatusConnection
+}
+
+type ProjectStatusConnectionCreated_at {
+  key: DateTime
+  connection: ProjectStatusConnection
+}
+
+type ProjectStatusConnectionUpdated_at {
+  key: DateTime
+  connection: ProjectStatusConnection
+}
+
+type ProjectStatusConnectionName {
+  key: String
+  connection: ProjectStatusConnection
+}
+
+type ProjectStatusConnectionSlug {
+  key: String
+  connection: ProjectStatusConnection
+}
+
+type ProjectStatusConnectionPublished_at {
+  key: DateTime
+  connection: ProjectStatusConnection
+}
+
+input ProjectStatusInput {
+  name: String
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editProjectStatusInput {
+  name: String
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createProjectStatusInput {
+  data: ProjectStatusInput
+}
+
+type createProjectStatusPayload {
+  projectStatus: ProjectStatus
+}
+
+input updateProjectStatusInput {
+  where: InputID
+  data: editProjectStatusInput
+}
+
+type updateProjectStatusPayload {
+  projectStatus: ProjectStatus
+}
+
+input deleteProjectStatusInput {
+  where: InputID
+}
+
+type deleteProjectStatusPayload {
+  projectStatus: ProjectStatus
+}
+
+type PropertyListing {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  property_type: String!
+  property_location: String!
+  development_name: String
+  number_of_beds: Int
+  number_of_bathrooms: Int
+  area: Int
+  fullname: String!
+  emailid: String!
+  mobile: String!
+  office_number: String
+  passport: UploadFile
+  title_deed: UploadFile
+  floor_plan: UploadFile
+  published_at: DateTime
+}
+
+type PropertyListingConnection {
+  values: [PropertyListing]
+  groupBy: PropertyListingGroupBy
+  aggregate: PropertyListingAggregator
+}
+
+type PropertyListingAggregator {
+  count: Int
+  totalCount: Int
+  sum: PropertyListingAggregatorSum
+  avg: PropertyListingAggregatorAvg
+  min: PropertyListingAggregatorMin
+  max: PropertyListingAggregatorMax
+}
+
+type PropertyListingAggregatorSum {
+  number_of_beds: Float
+  number_of_bathrooms: Float
+  area: Float
+}
+
+type PropertyListingAggregatorAvg {
+  number_of_beds: Float
+  number_of_bathrooms: Float
+  area: Float
+}
+
+type PropertyListingAggregatorMin {
+  number_of_beds: Float
+  number_of_bathrooms: Float
+  area: Float
+}
+
+type PropertyListingAggregatorMax {
+  number_of_beds: Float
+  number_of_bathrooms: Float
+  area: Float
+}
+
+type PropertyListingGroupBy {
+  id: [PropertyListingConnectionId]
+  created_at: [PropertyListingConnectionCreated_at]
+  updated_at: [PropertyListingConnectionUpdated_at]
+  property_type: [PropertyListingConnectionProperty_type]
+  property_location: [PropertyListingConnectionProperty_location]
+  development_name: [PropertyListingConnectionDevelopment_name]
+  number_of_beds: [PropertyListingConnectionNumber_of_beds]
+  number_of_bathrooms: [PropertyListingConnectionNumber_of_bathrooms]
+  area: [PropertyListingConnectionArea]
+  fullname: [PropertyListingConnectionFullname]
+  emailid: [PropertyListingConnectionEmailid]
+  mobile: [PropertyListingConnectionMobile]
+  office_number: [PropertyListingConnectionOffice_number]
+  passport: [PropertyListingConnectionPassport]
+  title_deed: [PropertyListingConnectionTitle_deed]
+  floor_plan: [PropertyListingConnectionFloor_plan]
+  published_at: [PropertyListingConnectionPublished_at]
+}
+
+type PropertyListingConnectionId {
+  key: ID
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionCreated_at {
+  key: DateTime
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionUpdated_at {
+  key: DateTime
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionProperty_type {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionProperty_location {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionDevelopment_name {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionNumber_of_beds {
+  key: Int
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionNumber_of_bathrooms {
+  key: Int
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionArea {
+  key: Int
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionFullname {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionEmailid {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionMobile {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionOffice_number {
+  key: String
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionPassport {
+  key: ID
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionTitle_deed {
+  key: ID
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionFloor_plan {
+  key: ID
+  connection: PropertyListingConnection
+}
+
+type PropertyListingConnectionPublished_at {
+  key: DateTime
+  connection: PropertyListingConnection
+}
+
+input PropertyListingInput {
+  property_type: String!
+  property_location: String!
+  development_name: String
+  number_of_beds: Int
+  number_of_bathrooms: Int
+  area: Int
+  fullname: String!
+  emailid: String!
+  mobile: String!
+  office_number: String
+  passport: ID
+  title_deed: ID
+  floor_plan: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPropertyListingInput {
+  property_type: String
+  property_location: String
+  development_name: String
+  number_of_beds: Int
+  number_of_bathrooms: Int
+  area: Int
+  fullname: String
+  emailid: String
+  mobile: String
+  office_number: String
+  passport: ID
+  title_deed: ID
+  floor_plan: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPropertyListingInput {
+  data: PropertyListingInput
+}
+
+type createPropertyListingPayload {
+  propertyListing: PropertyListing
+}
+
+input updatePropertyListingInput {
+  where: InputID
+  data: editPropertyListingInput
+}
+
+type updatePropertyListingPayload {
+  propertyListing: PropertyListing
+}
+
+input deletePropertyListingInput {
+  where: InputID
+}
+
+type deletePropertyListingPayload {
+  propertyListing: PropertyListing
+}
+
+type PropertyPage {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  seo: ComponentSharedSeo
+  published_at: DateTime
+}
+
+input PropertyPageInput {
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPropertyPageInput {
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updatePropertyPageInput {
+  data: editPropertyPageInput
+}
+
+type updatePropertyPagePayload {
+  propertyPage: PropertyPage
+}
+
+type deletePropertyPagePayload {
+  propertyPage: PropertyPage
+}
+
+type PropertyStatus {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  slug: String
+  published_at: DateTime
+  properties(sort: String, limit: Int, start: Int, where: JSON): [Property]
+}
+
+type PropertyStatusConnection {
+  values: [PropertyStatus]
+  groupBy: PropertyStatusGroupBy
+  aggregate: PropertyStatusAggregator
+}
+
+type PropertyStatusAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PropertyStatusGroupBy {
+  id: [PropertyStatusConnectionId]
+  created_at: [PropertyStatusConnectionCreated_at]
+  updated_at: [PropertyStatusConnectionUpdated_at]
+  name: [PropertyStatusConnectionName]
+  slug: [PropertyStatusConnectionSlug]
+  published_at: [PropertyStatusConnectionPublished_at]
+}
+
+type PropertyStatusConnectionId {
+  key: ID
+  connection: PropertyStatusConnection
+}
+
+type PropertyStatusConnectionCreated_at {
+  key: DateTime
+  connection: PropertyStatusConnection
+}
+
+type PropertyStatusConnectionUpdated_at {
+  key: DateTime
+  connection: PropertyStatusConnection
+}
+
+type PropertyStatusConnectionName {
+  key: String
+  connection: PropertyStatusConnection
+}
+
+type PropertyStatusConnectionSlug {
+  key: String
+  connection: PropertyStatusConnection
+}
+
+type PropertyStatusConnectionPublished_at {
+  key: DateTime
+  connection: PropertyStatusConnection
+}
+
+input PropertyStatusInput {
+  name: String
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPropertyStatusInput {
+  name: String
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPropertyStatusInput {
+  data: PropertyStatusInput
+}
+
+type createPropertyStatusPayload {
+  propertyStatus: PropertyStatus
+}
+
+input updatePropertyStatusInput {
+  where: InputID
+  data: editPropertyStatusInput
+}
+
+type updatePropertyStatusPayload {
+  propertyStatus: PropertyStatus
+}
+
+input deletePropertyStatusInput {
+  where: InputID
+}
+
+type deletePropertyStatusPayload {
+  propertyStatus: PropertyStatus
+}
+
+type PropertyType {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  slug: String
+  published_at: DateTime
+  properties(sort: String, limit: Int, start: Int, where: JSON): [Property]
+}
+
+type PropertyTypeConnection {
+  values: [PropertyType]
+  groupBy: PropertyTypeGroupBy
+  aggregate: PropertyTypeAggregator
+}
+
+type PropertyTypeAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PropertyTypeGroupBy {
+  id: [PropertyTypeConnectionId]
+  created_at: [PropertyTypeConnectionCreated_at]
+  updated_at: [PropertyTypeConnectionUpdated_at]
+  name: [PropertyTypeConnectionName]
+  slug: [PropertyTypeConnectionSlug]
+  published_at: [PropertyTypeConnectionPublished_at]
+}
+
+type PropertyTypeConnectionId {
+  key: ID
+  connection: PropertyTypeConnection
+}
+
+type PropertyTypeConnectionCreated_at {
+  key: DateTime
+  connection: PropertyTypeConnection
+}
+
+type PropertyTypeConnectionUpdated_at {
+  key: DateTime
+  connection: PropertyTypeConnection
+}
+
+type PropertyTypeConnectionName {
+  key: String
+  connection: PropertyTypeConnection
+}
+
+type PropertyTypeConnectionSlug {
+  key: String
+  connection: PropertyTypeConnection
+}
+
+type PropertyTypeConnectionPublished_at {
+  key: DateTime
+  connection: PropertyTypeConnection
+}
+
+input PropertyTypeInput {
+  name: String!
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPropertyTypeInput {
+  name: String
+  slug: String
+  properties: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPropertyTypeInput {
+  data: PropertyTypeInput
+}
+
+type createPropertyTypePayload {
+  propertyType: PropertyType
+}
+
+input updatePropertyTypeInput {
+  where: InputID
+  data: editPropertyTypeInput
+}
+
+type updatePropertyTypePayload {
+  propertyType: PropertyType
+}
+
+input deletePropertyTypeInput {
+  where: InputID
+}
+
+type deletePropertyTypePayload {
+  propertyType: PropertyType
+}
+
+enum ENUM_PROPERTY_STATUS {
+  Featured
+  New
+}
+
+type Property {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  address: String
+  location: String
+  status: ENUM_PROPERTY_STATUS
+  bedrooms: String
+  bathroom: String
+  price: String
+  description: String
+  slug: String!
+  property_type: PropertyType
+  property_status: PropertyStatus
+  project_status: ProjectStatus
+  area: String
+  latitude: Float
+  longitude: Float
+  developerName: String
+  Seo: ComponentSharedSeo
+  area_guide: AreaGuide
+  published_at: DateTime
+  images(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  tags(sort: String, limit: Int, start: Int, where: JSON): [Tag]
+}
+
+type PropertyConnection {
+  values: [Property]
+  groupBy: PropertyGroupBy
+  aggregate: PropertyAggregator
+}
+
+type PropertyAggregator {
+  count: Int
+  totalCount: Int
+  sum: PropertyAggregatorSum
+  avg: PropertyAggregatorAvg
+  min: PropertyAggregatorMin
+  max: PropertyAggregatorMax
+}
+
+type PropertyAggregatorSum {
+  latitude: Float
+  longitude: Float
+}
+
+type PropertyAggregatorAvg {
+  latitude: Float
+  longitude: Float
+}
+
+type PropertyAggregatorMin {
+  latitude: Float
+  longitude: Float
+}
+
+type PropertyAggregatorMax {
+  latitude: Float
+  longitude: Float
+}
+
+type PropertyGroupBy {
+  id: [PropertyConnectionId]
+  created_at: [PropertyConnectionCreated_at]
+  updated_at: [PropertyConnectionUpdated_at]
+  title: [PropertyConnectionTitle]
+  address: [PropertyConnectionAddress]
+  location: [PropertyConnectionLocation]
+  status: [PropertyConnectionStatus]
+  bedrooms: [PropertyConnectionBedrooms]
+  bathroom: [PropertyConnectionBathroom]
+  price: [PropertyConnectionPrice]
+  description: [PropertyConnectionDescription]
+  slug: [PropertyConnectionSlug]
+  property_type: [PropertyConnectionProperty_type]
+  property_status: [PropertyConnectionProperty_status]
+  project_status: [PropertyConnectionProject_status]
+  area: [PropertyConnectionArea]
+  latitude: [PropertyConnectionLatitude]
+  longitude: [PropertyConnectionLongitude]
+  developerName: [PropertyConnectionDeveloperName]
+  Seo: [PropertyConnectionSeo]
+  area_guide: [PropertyConnectionArea_guide]
+  published_at: [PropertyConnectionPublished_at]
+}
+
+type PropertyConnectionId {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionCreated_at {
+  key: DateTime
+  connection: PropertyConnection
+}
+
+type PropertyConnectionUpdated_at {
+  key: DateTime
+  connection: PropertyConnection
+}
+
+type PropertyConnectionTitle {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionAddress {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionLocation {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionStatus {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionBedrooms {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionBathroom {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionPrice {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionDescription {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionSlug {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionProperty_type {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionProperty_status {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionProject_status {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionArea {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionLatitude {
+  key: Float
+  connection: PropertyConnection
+}
+
+type PropertyConnectionLongitude {
+  key: Float
+  connection: PropertyConnection
+}
+
+type PropertyConnectionDeveloperName {
+  key: String
+  connection: PropertyConnection
+}
+
+type PropertyConnectionSeo {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionArea_guide {
+  key: ID
+  connection: PropertyConnection
+}
+
+type PropertyConnectionPublished_at {
+  key: DateTime
+  connection: PropertyConnection
+}
+
+input PropertyInput {
+  title: String!
+  address: String
+  location: String
+  status: ENUM_PROPERTY_STATUS
+  bedrooms: String
+  bathroom: String
+  price: String
+  description: String
+  images: [ID]
+  slug: String!
+  property_type: ID
+  property_status: ID
+  project_status: ID
+  area: String
+  latitude: Float
+  longitude: Float
+  developerName: String
+  Seo: ComponentSharedSeoInput
+  area_guide: ID
+  tags: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPropertyInput {
+  title: String
+  address: String
+  location: String
+  status: ENUM_PROPERTY_STATUS
+  bedrooms: String
+  bathroom: String
+  price: String
+  description: String
+  images: [ID]
+  slug: String
+  property_type: ID
+  property_status: ID
+  project_status: ID
+  area: String
+  latitude: Float
+  longitude: Float
+  developerName: String
+  Seo: editComponentSharedSeoInput
+  area_guide: ID
+  tags: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPropertyInput {
+  data: PropertyInput
+}
+
+type createPropertyPayload {
+  property: Property
+}
+
+input updatePropertyInput {
+  where: InputID
+  data: editPropertyInput
+}
+
+type updatePropertyPayload {
+  property: Property
+}
+
+input deletePropertyInput {
+  where: InputID
+}
+
+type deletePropertyPayload {
+  property: Property
+}
+
+type Services {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String!
+  banner: UploadFile
+  servicecard: [ComponentSectionsServicecard]
+  seo: ComponentSharedSeo
+  published_at: DateTime
+}
+
+input ServiceInput {
+  title: String!
+  description: String!
+  banner: ID
+  servicecard: [ComponentSectionsServicecardInput]
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editServiceInput {
+  title: String
+  description: String
+  banner: ID
+  servicecard: [editComponentSectionsServicecardInput]
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updateServiceInput {
+  data: editServiceInput
+}
+
+type updateServicePayload {
+  service: Services
+}
+
+type deleteServicePayload {
+  service: Services
+}
+
+type Social {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  published_at: DateTime
+}
+
+input SocialInput {
+  title: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editSocialInput {
+  title: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input updateSocialInput {
+  data: editSocialInput
+}
+
+type updateSocialPayload {
+  social: Social
+}
+
+type deleteSocialPayload {
+  social: Social
+}
+
+type SubCategory {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  label: String!
+  slug: String!
+  gallery_category: GalleryCategory
+  published_at: DateTime
+  galleries(sort: String, limit: Int, start: Int, where: JSON): [Gallery]
+  media(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+type SubCategoryConnection {
+  values: [SubCategory]
+  groupBy: SubCategoryGroupBy
+  aggregate: SubCategoryAggregator
+}
+
+type SubCategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SubCategoryGroupBy {
+  id: [SubCategoryConnectionId]
+  created_at: [SubCategoryConnectionCreated_at]
+  updated_at: [SubCategoryConnectionUpdated_at]
+  label: [SubCategoryConnectionLabel]
+  slug: [SubCategoryConnectionSlug]
+  gallery_category: [SubCategoryConnectionGallery_category]
+  published_at: [SubCategoryConnectionPublished_at]
+}
+
+type SubCategoryConnectionId {
+  key: ID
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionCreated_at {
+  key: DateTime
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionUpdated_at {
+  key: DateTime
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionLabel {
+  key: String
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionSlug {
+  key: String
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionGallery_category {
+  key: ID
+  connection: SubCategoryConnection
+}
+
+type SubCategoryConnectionPublished_at {
+  key: DateTime
+  connection: SubCategoryConnection
+}
+
+input SubCategoryInput {
+  label: String!
+  slug: String!
+  galleries: [ID]
+  gallery_category: ID
+  media: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editSubCategoryInput {
+  label: String
+  slug: String
+  galleries: [ID]
+  gallery_category: ID
+  media: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createSubCategoryInput {
+  data: SubCategoryInput
+}
+
+type createSubCategoryPayload {
+  subCategory: SubCategory
+}
+
+input updateSubCategoryInput {
+  where: InputID
+  data: editSubCategoryInput
+}
+
+type updateSubCategoryPayload {
+  subCategory: SubCategory
+}
+
+input deleteSubCategoryInput {
+  where: InputID
+}
+
+type deleteSubCategoryPayload {
+  subCategory: SubCategory
+}
+
+type Tag {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  label: String!
+  slug: String
+  seo: ComponentSharedSeo
+  published_at: DateTime
+  properties(sort: String, limit: Int, start: Int, where: JSON): [Property]
+}
+
+type TagConnection {
+  values: [Tag]
+  groupBy: TagGroupBy
+  aggregate: TagAggregator
+}
+
+type TagAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TagGroupBy {
+  id: [TagConnectionId]
+  created_at: [TagConnectionCreated_at]
+  updated_at: [TagConnectionUpdated_at]
+  label: [TagConnectionLabel]
+  slug: [TagConnectionSlug]
+  seo: [TagConnectionSeo]
+  published_at: [TagConnectionPublished_at]
+}
+
+type TagConnectionId {
+  key: ID
+  connection: TagConnection
+}
+
+type TagConnectionCreated_at {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagConnectionUpdated_at {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagConnectionLabel {
+  key: String
+  connection: TagConnection
+}
+
+type TagConnectionSlug {
+  key: String
+  connection: TagConnection
+}
+
+type TagConnectionSeo {
+  key: ID
+  connection: TagConnection
+}
+
+type TagConnectionPublished_at {
+  key: DateTime
+  connection: TagConnection
+}
+
+input TagInput {
+  label: String!
+  properties: [ID]
+  slug: String
+  seo: ComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTagInput {
+  label: String
+  properties: [ID]
+  slug: String
+  seo: editComponentSharedSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTagInput {
+  data: TagInput
+}
+
+type createTagPayload {
+  tag: Tag
+}
+
+input updateTagInput {
+  where: InputID
+  data: editTagInput
+}
+
+type updateTagPayload {
+  tag: Tag
+}
+
+input deleteTagInput {
+  where: InputID
+}
+
+type deleteTagPayload {
+  tag: Tag
+}
+
+type Writer {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  picture: UploadFile
+  email: String
+  articles(sort: String, limit: Int, start: Int, where: JSON): [Article]
+}
+
+type WriterConnection {
+  values: [Writer]
+  groupBy: WriterGroupBy
+  aggregate: WriterAggregator
+}
+
+type WriterAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type WriterGroupBy {
+  id: [WriterConnectionId]
+  created_at: [WriterConnectionCreated_at]
+  updated_at: [WriterConnectionUpdated_at]
+  name: [WriterConnectionName]
+  picture: [WriterConnectionPicture]
+  email: [WriterConnectionEmail]
+}
+
+type WriterConnectionId {
+  key: ID
+  connection: WriterConnection
+}
+
+type WriterConnectionCreated_at {
+  key: DateTime
+  connection: WriterConnection
+}
+
+type WriterConnectionUpdated_at {
+  key: DateTime
+  connection: WriterConnection
+}
+
+type WriterConnectionName {
+  key: String
+  connection: WriterConnection
+}
+
+type WriterConnectionPicture {
+  key: ID
+  connection: WriterConnection
+}
+
+type WriterConnectionEmail {
+  key: String
+  connection: WriterConnection
+}
+
+input WriterInput {
+  name: String
+  picture: ID
+  articles: [ID]
+  email: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editWriterInput {
+  name: String
+  picture: ID
+  articles: [ID]
+  email: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createWriterInput {
+  data: WriterInput
+}
+
+type createWriterPayload {
+  writer: Writer
+}
+
+input updateWriterInput {
+  where: InputID
+  data: editWriterInput
+}
+
+type updateWriterPayload {
+  writer: Writer
+}
+
+input deleteWriterInput {
+  where: InputID
+}
+
+type deleteWriterPayload {
+  writer: Writer
+}
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentSectionsFeatureBlock {
+  id: ID!
+  featureTile: String
+  feature_description: String
+  feature_image: UploadFile
+}
+
+input ComponentSectionsFeatureBlockInput {
+  featureTile: String
+  feature_description: String
+  feature_image: ID
+}
+
+input editComponentSectionsFeatureBlockInput {
+  id: ID
+  featureTile: String
+  feature_description: String
+  feature_image: ID
+}
+
+enum ENUM_COMPONENTSECTIONSFEATURESCARD_CARDCOLOR {
+  light
+  dark
+}
+
+type ComponentSectionsFeaturescard {
+  id: ID!
+  title: String!
+  description: String
+  image: UploadFile
+  cardcolor: ENUM_COMPONENTSECTIONSFEATURESCARD_CARDCOLOR!
+}
+
+input ComponentSectionsFeaturescardInput {
+  title: String!
+  description: String
+  image: ID
+  cardcolor: ENUM_COMPONENTSECTIONSFEATURESCARD_CARDCOLOR!
+}
+
+input editComponentSectionsFeaturescardInput {
+  id: ID
+  title: String
+  description: String
+  image: ID
+  cardcolor: ENUM_COMPONENTSECTIONSFEATURESCARD_CARDCOLOR
+}
+
+type ComponentSectionsHero {
+  id: ID!
+  title: String!
+}
+
+input ComponentSectionsHeroInput {
+  title: String!
+}
+
+input editComponentSectionsHeroInput {
+  id: ID
+  title: String
+}
+
+type ComponentSectionsMeetourteam {
+  id: ID!
+  membername: String
+  memberposition: String
+  memberdescription: String
+  linkedin_profile: String
+  twitter_profile: String
+  facebook_profile: String
+  memberimage: UploadFile
+}
+
+input ComponentSectionsMeetourteamInput {
+  membername: String
+  memberposition: String
+  memberdescription: String
+  linkedin_profile: String
+  twitter_profile: String
+  facebook_profile: String
+  memberimage: ID
+}
+
+input editComponentSectionsMeetourteamInput {
+  id: ID
+  membername: String
+  memberposition: String
+  memberdescription: String
+  linkedin_profile: String
+  twitter_profile: String
+  facebook_profile: String
+  memberimage: ID
+}
+
+type ComponentSectionsOurTeam {
+  id: ID!
+}
+
+input ComponentSectionsOurTeamInput {
+  _: String
+}
+
+input editComponentSectionsOurTeamInput {
+  id: ID
+}
+
+type ComponentSectionsOurteam {
+  id: ID!
+}
+
+input ComponentSectionsOurteamInput {
+  _: String
+}
+
+input editComponentSectionsOurteamInput {
+  id: ID
+}
+
+type ComponentSectionsServicecard {
+  id: ID!
+  title: String!
+  image: UploadFile
+  hoverimage: UploadFile
+  description: String
+}
+
+input ComponentSectionsServicecardInput {
+  title: String!
+  image: ID
+  hoverimage: ID
+  description: String
+}
+
+input editComponentSectionsServicecardInput {
+  id: ID
+  title: String
+  image: ID
+  hoverimage: ID
+  description: String
+}
+
+type ComponentSectionsSm {
+  id: ID!
+  title: String!
+  link: String
+}
+
+input ComponentSectionsSmInput {
+  title: String!
+  link: String
+}
+
+input editComponentSectionsSmInput {
+  id: ID
+  title: String
+  link: String
+}
+
+type ComponentSectionsSocialMedia {
+  id: ID!
+  title: String!
+  url: String!
+}
+
+input ComponentSectionsSocialMediaInput {
+  title: String!
+  url: String!
+}
+
+input editComponentSectionsSocialMediaInput {
+  id: ID
+  title: String
+  url: String
+}
+
+type ComponentSectionsTestimonial {
+  id: ID!
+  client_name: String
+  testimonial_caption: String
+  testimonial_description: String
+  testimonial_image: UploadFile
+  client_image: UploadFile
+}
+
+input ComponentSectionsTestimonialInput {
+  client_name: String
+  testimonial_caption: String
+  testimonial_description: String
+  testimonial_image: ID
+  client_image: ID
+}
+
+input editComponentSectionsTestimonialInput {
+  id: ID
+  client_name: String
+  testimonial_caption: String
+  testimonial_description: String
+  testimonial_image: ID
+  client_image: ID
+}
+
+type ComponentSharedSeo {
+  id: ID!
+  metaTitle: String!
+  metaDescription: String!
+  shareImage: UploadFile
+}
+
+input ComponentSharedSeoInput {
+  metaTitle: String!
+  metaDescription: String!
+  shareImage: ID
+}
+
+input editComponentSharedSeoInput {
+  id: ID
+  metaTitle: String
+  metaDescription: String
+  shareImage: ID
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | About | updateAboutPayload | deleteAboutPayload | AreaGuide | AreaGuideConnection | AreaGuideAggregator | AreaGuideGroupBy | AreaGuideConnectionId | AreaGuideConnectionCreated_at | AreaGuideConnectionUpdated_at | AreaGuideConnectionTitle | AreaGuideConnectionDescription | AreaGuideConnectionImage | AreaGuideConnectionSlug | AreaGuideConnectionFull_description | AreaGuideConnectionPublished_at | createAreaGuidePayload | updateAreaGuidePayload | deleteAreaGuidePayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnectionCreated_at | ArticleConnectionUpdated_at | ArticleConnectionTitle | ArticleConnectionDescription | ArticleConnectionContent | ArticleConnectionPublishedAt | ArticleConnectionStatus | ArticleConnectionSlug | ArticleConnectionCategory | ArticleConnectionImage | ArticleConnectionAuthor | ArticleConnectionSeo | createArticlePayload | updateArticlePayload | deleteArticlePayload | CareersListing | CareersListingConnection | CareersListingAggregator | CareersListingGroupBy | CareersListingConnectionId | CareersListingConnectionCreated_at | CareersListingConnectionUpdated_at | CareersListingConnectionFullname | CareersListingConnectionEmail | CareersListingConnectionMobile | CareersListingConnectionCountry | CareersListingConnectionAddress | CareersListingConnectionSchool | CareersListingConnectionDegree | CareersListingConnectionPost_graduation | CareersListingConnectionAdditional_certification | CareersListingConnectionResume | CareersListingConnectionPublished_at | createCareersListingPayload | updateCareersListingPayload | deleteCareersListingPayload | Careers | updateCareerPayload | deleteCareerPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Contactus | ContactusConnection | ContactusAggregator | ContactusGroupBy | ContactusConnectionId | ContactusConnectionCreated_at | ContactusConnectionUpdated_at | ContactusConnectionFull_name | ContactusConnectionEmail | ContactusConnectionMobile | ContactusConnectionMessage | ContactusConnectionPublished_at | createContactusPayload | updateContactusPayload | deleteContactusPayload | Enquiries | EnquiriesConnection | EnquiriesAggregator | EnquiriesGroupBy | EnquiriesConnectionId | EnquiriesConnectionCreated_at | EnquiriesConnectionUpdated_at | EnquiriesConnectionFull_name | EnquiriesConnectionEmail | EnquiriesConnectionMobile | EnquiriesConnectionBudget | EnquiriesConnectionCity | EnquiriesConnectionHome_type | EnquiriesConnectionSalary_scale | EnquiriesConnectionPublished_at | createEnquiryPayload | updateEnquiryPayload | deleteEnquiryPayload | GalleryCategory | GalleryCategoryConnection | GalleryCategoryAggregator | GalleryCategoryGroupBy | GalleryCategoryConnectionId | GalleryCategoryConnectionCreated_at | GalleryCategoryConnectionUpdated_at | GalleryCategoryConnectionLabel | GalleryCategoryConnectionSlug | GalleryCategoryConnectionPublished_at | createGalleryCategoryPayload | updateGalleryCategoryPayload | deleteGalleryCategoryPayload | Gallery | GalleryConnection | GalleryAggregator | GalleryGroupBy | GalleryConnectionId | GalleryConnectionCreated_at | GalleryConnectionUpdated_at | GalleryConnectionLabel | GalleryConnectionImage | GalleryConnectionSub_category | GalleryConnectionPublished_at | createGalleryPayload | updateGalleryPayload | deleteGalleryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Home | updateHomePayload | deleteHomePayload | Homepage | updateHomepagePayload | deleteHomepagePayload | Jobs | JobsConnection | JobsAggregator | JobsGroupBy | JobsConnectionId | JobsConnectionCreated_at | JobsConnectionUpdated_at | JobsConnectionTitle | JobsConnectionDescription | JobsConnectionLocation | JobsConnectionJob_type | JobsConnectionPosted_on | JobsConnectionPublished_at | createJobPayload | updateJobPayload | deleteJobPayload | Newsletter | NewsletterConnection | NewsletterAggregator | NewsletterGroupBy | NewsletterConnectionId | NewsletterConnectionCreated_at | NewsletterConnectionUpdated_at | NewsletterConnectionEmail | NewsletterConnectionPublished_at | createNewsletterPayload | updateNewsletterPayload | deleteNewsletterPayload | ProjectStatus | ProjectStatusConnection | ProjectStatusAggregator | ProjectStatusGroupBy | ProjectStatusConnectionId | ProjectStatusConnectionCreated_at | ProjectStatusConnectionUpdated_at | ProjectStatusConnectionName | ProjectStatusConnectionSlug | ProjectStatusConnectionPublished_at | createProjectStatusPayload | updateProjectStatusPayload | deleteProjectStatusPayload | PropertyListing | PropertyListingConnection | PropertyListingAggregator | PropertyListingAggregatorSum | PropertyListingAggregatorAvg | PropertyListingAggregatorMin | PropertyListingAggregatorMax | PropertyListingGroupBy | PropertyListingConnectionId | PropertyListingConnectionCreated_at | PropertyListingConnectionUpdated_at | PropertyListingConnectionProperty_type | PropertyListingConnectionProperty_location | PropertyListingConnectionDevelopment_name | PropertyListingConnectionNumber_of_beds | PropertyListingConnectionNumber_of_bathrooms | PropertyListingConnectionArea | PropertyListingConnectionFullname | PropertyListingConnectionEmailid | PropertyListingConnectionMobile | PropertyListingConnectionOffice_number | PropertyListingConnectionPassport | PropertyListingConnectionTitle_deed | PropertyListingConnectionFloor_plan | PropertyListingConnectionPublished_at | createPropertyListingPayload | updatePropertyListingPayload | deletePropertyListingPayload | PropertyPage | updatePropertyPagePayload | deletePropertyPagePayload | PropertyStatus | PropertyStatusConnection | PropertyStatusAggregator | PropertyStatusGroupBy | PropertyStatusConnectionId | PropertyStatusConnectionCreated_at | PropertyStatusConnectionUpdated_at | PropertyStatusConnectionName | PropertyStatusConnectionSlug | PropertyStatusConnectionPublished_at | createPropertyStatusPayload | updatePropertyStatusPayload | deletePropertyStatusPayload | PropertyType | PropertyTypeConnection | PropertyTypeAggregator | PropertyTypeGroupBy | PropertyTypeConnectionId | PropertyTypeConnectionCreated_at | PropertyTypeConnectionUpdated_at | PropertyTypeConnectionName | PropertyTypeConnectionSlug | PropertyTypeConnectionPublished_at | createPropertyTypePayload | updatePropertyTypePayload | deletePropertyTypePayload | Property | PropertyConnection | PropertyAggregator | PropertyAggregatorSum | PropertyAggregatorAvg | PropertyAggregatorMin | PropertyAggregatorMax | PropertyGroupBy | PropertyConnectionId | PropertyConnectionCreated_at | PropertyConnectionUpdated_at | PropertyConnectionTitle | PropertyConnectionAddress | PropertyConnectionLocation | PropertyConnectionStatus | PropertyConnectionBedrooms | PropertyConnectionBathroom | PropertyConnectionPrice | PropertyConnectionDescription | PropertyConnectionSlug | PropertyConnectionProperty_type | PropertyConnectionProperty_status | PropertyConnectionProject_status | PropertyConnectionArea | PropertyConnectionLatitude | PropertyConnectionLongitude | PropertyConnectionDeveloperName | PropertyConnectionSeo | PropertyConnectionArea_guide | PropertyConnectionPublished_at | createPropertyPayload | updatePropertyPayload | deletePropertyPayload | Services | updateServicePayload | deleteServicePayload | Social | updateSocialPayload | deleteSocialPayload | SubCategory | SubCategoryConnection | SubCategoryAggregator | SubCategoryGroupBy | SubCategoryConnectionId | SubCategoryConnectionCreated_at | SubCategoryConnectionUpdated_at | SubCategoryConnectionLabel | SubCategoryConnectionSlug | SubCategoryConnectionGallery_category | SubCategoryConnectionPublished_at | createSubCategoryPayload | updateSubCategoryPayload | deleteSubCategoryPayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_at | TagConnectionUpdated_at | TagConnectionLabel | TagConnectionSlug | TagConnectionSeo | TagConnectionPublished_at | createTagPayload | updateTagPayload | deleteTagPayload | Writer | WriterConnection | WriterAggregator | WriterGroupBy | WriterConnectionId | WriterConnectionCreated_at | WriterConnectionUpdated_at | WriterConnectionName | WriterConnectionPicture | WriterConnectionEmail | createWriterPayload | updateWriterPayload | deleteWriterPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSectionsFeatureBlock | ComponentSectionsFeaturescard | ComponentSectionsHero | ComponentSectionsMeetourteam | ComponentSectionsOurTeam | ComponentSectionsOurteam | ComponentSectionsServicecard | ComponentSectionsSm | ComponentSectionsSocialMedia | ComponentSectionsTestimonial | ComponentSharedSeo
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  about(publicationState: PublicationState): About
+  areaGuide(id: ID!, publicationState: PublicationState): AreaGuide
+  areaGuides(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [AreaGuide]
+  areaGuidesConnection(sort: String, limit: Int, start: Int, where: JSON): AreaGuideConnection
+  article(id: ID!, publicationState: PublicationState): Article
+  articles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Article]
+  articlesConnection(sort: String, limit: Int, start: Int, where: JSON): ArticleConnection
+  careersListing(id: ID!, publicationState: PublicationState): CareersListing
+  careersListings(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CareersListing]
+  careersListingsConnection(sort: String, limit: Int, start: Int, where: JSON): CareersListingConnection
+  career(publicationState: PublicationState): Careers
+  category(id: ID!, publicationState: PublicationState): Category
+  categories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Category]
+  categoriesConnection(sort: String, limit: Int, start: Int, where: JSON): CategoryConnection
+  contactus(id: ID!, publicationState: PublicationState): Contactus
+  contactuses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Contactus]
+  contactusesConnection(sort: String, limit: Int, start: Int, where: JSON): ContactusConnection
+  enquiry(id: ID!, publicationState: PublicationState): Enquiries
+  enquiries(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Enquiries]
+  enquiriesConnection(sort: String, limit: Int, start: Int, where: JSON): EnquiriesConnection
+  galleryCategory(id: ID!, publicationState: PublicationState): GalleryCategory
+  galleryCategories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GalleryCategory]
+  galleryCategoriesConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryCategoryConnection
+  gallery(id: ID!, publicationState: PublicationState): Gallery
+  galleries(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Gallery]
+  galleriesConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryConnection
+  global(publicationState: PublicationState): Global
+  home(publicationState: PublicationState): Home
+  homepage(publicationState: PublicationState): Homepage
+  job(id: ID!, publicationState: PublicationState): Jobs
+  jobs(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Jobs]
+  jobsConnection(sort: String, limit: Int, start: Int, where: JSON): JobsConnection
+  newsletter(id: ID!, publicationState: PublicationState): Newsletter
+  newsletters(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Newsletter]
+  newslettersConnection(sort: String, limit: Int, start: Int, where: JSON): NewsletterConnection
+  projectStatus(id: ID!, publicationState: PublicationState): ProjectStatus
+  projectStatuses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ProjectStatus]
+  projectStatusesConnection(sort: String, limit: Int, start: Int, where: JSON): ProjectStatusConnection
+  propertyListing(id: ID!, publicationState: PublicationState): PropertyListing
+  propertyListings(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PropertyListing]
+  propertyListingsConnection(sort: String, limit: Int, start: Int, where: JSON): PropertyListingConnection
+  propertyPage(publicationState: PublicationState): PropertyPage
+  propertyStatus(id: ID!, publicationState: PublicationState): PropertyStatus
+  propertyStatuses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PropertyStatus]
+  propertyStatusesConnection(sort: String, limit: Int, start: Int, where: JSON): PropertyStatusConnection
+  propertyType(id: ID!, publicationState: PublicationState): PropertyType
+  propertyTypes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PropertyType]
+  propertyTypesConnection(sort: String, limit: Int, start: Int, where: JSON): PropertyTypeConnection
+  property(id: ID!, publicationState: PublicationState): Property
+  properties(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Property]
+  propertiesConnection(sort: String, limit: Int, start: Int, where: JSON): PropertyConnection
+  service(publicationState: PublicationState): Services
+  social(publicationState: PublicationState): Social
+  subCategory(id: ID!, publicationState: PublicationState): SubCategory
+  subCategories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [SubCategory]
+  subCategoriesConnection(sort: String, limit: Int, start: Int, where: JSON): SubCategoryConnection
+  tag(id: ID!, publicationState: PublicationState): Tag
+  tags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Tag]
+  tagsConnection(sort: String, limit: Int, start: Int, where: JSON): TagConnection
+  writer(id: ID!, publicationState: PublicationState): Writer
+  writers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Writer]
+  writersConnection(sort: String, limit: Int, start: Int, where: JSON): WriterConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  updateAbout(input: updateAboutInput): updateAboutPayload
+  deleteAbout: deleteAboutPayload
+  createAreaGuide(input: createAreaGuideInput): createAreaGuidePayload
+  updateAreaGuide(input: updateAreaGuideInput): updateAreaGuidePayload
+  deleteAreaGuide(input: deleteAreaGuideInput): deleteAreaGuidePayload
+  createArticle(input: createArticleInput): createArticlePayload
+  updateArticle(input: updateArticleInput): updateArticlePayload
+  deleteArticle(input: deleteArticleInput): deleteArticlePayload
+  createCareersListing(input: createCareersListingInput): createCareersListingPayload
+  updateCareersListing(input: updateCareersListingInput): updateCareersListingPayload
+  deleteCareersListing(input: deleteCareersListingInput): deleteCareersListingPayload
+  updateCareer(input: updateCareerInput): updateCareerPayload
+  deleteCareer: deleteCareerPayload
+  createCategory(input: createCategoryInput): createCategoryPayload
+  updateCategory(input: updateCategoryInput): updateCategoryPayload
+  deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
+  createContactus(input: createContactusInput): createContactusPayload
+  updateContactus(input: updateContactusInput): updateContactusPayload
+  deleteContactus(input: deleteContactusInput): deleteContactusPayload
+  createEnquiry(input: createEnquiryInput): createEnquiryPayload
+  updateEnquiry(input: updateEnquiryInput): updateEnquiryPayload
+  deleteEnquiry(input: deleteEnquiryInput): deleteEnquiryPayload
+  createGalleryCategory(input: createGalleryCategoryInput): createGalleryCategoryPayload
+  updateGalleryCategory(input: updateGalleryCategoryInput): updateGalleryCategoryPayload
+  deleteGalleryCategory(input: deleteGalleryCategoryInput): deleteGalleryCategoryPayload
+  createGallery(input: createGalleryInput): createGalleryPayload
+  updateGallery(input: updateGalleryInput): updateGalleryPayload
+  deleteGallery(input: deleteGalleryInput): deleteGalleryPayload
+  updateGlobal(input: updateGlobalInput): updateGlobalPayload
+  deleteGlobal: deleteGlobalPayload
+  updateHome(input: updateHomeInput): updateHomePayload
+  deleteHome: deleteHomePayload
+  updateHomepage(input: updateHomepageInput): updateHomepagePayload
+  deleteHomepage: deleteHomepagePayload
+  createJob(input: createJobInput): createJobPayload
+  updateJob(input: updateJobInput): updateJobPayload
+  deleteJob(input: deleteJobInput): deleteJobPayload
+  createNewsletter(input: createNewsletterInput): createNewsletterPayload
+  updateNewsletter(input: updateNewsletterInput): updateNewsletterPayload
+  deleteNewsletter(input: deleteNewsletterInput): deleteNewsletterPayload
+  createProjectStatus(input: createProjectStatusInput): createProjectStatusPayload
+  updateProjectStatus(input: updateProjectStatusInput): updateProjectStatusPayload
+  deleteProjectStatus(input: deleteProjectStatusInput): deleteProjectStatusPayload
+  createPropertyListing(input: createPropertyListingInput): createPropertyListingPayload
+  updatePropertyListing(input: updatePropertyListingInput): updatePropertyListingPayload
+  deletePropertyListing(input: deletePropertyListingInput): deletePropertyListingPayload
+  updatePropertyPage(input: updatePropertyPageInput): updatePropertyPagePayload
+  deletePropertyPage: deletePropertyPagePayload
+  createPropertyStatus(input: createPropertyStatusInput): createPropertyStatusPayload
+  updatePropertyStatus(input: updatePropertyStatusInput): updatePropertyStatusPayload
+  deletePropertyStatus(input: deletePropertyStatusInput): deletePropertyStatusPayload
+  createPropertyType(input: createPropertyTypeInput): createPropertyTypePayload
+  updatePropertyType(input: updatePropertyTypeInput): updatePropertyTypePayload
+  deletePropertyType(input: deletePropertyTypeInput): deletePropertyTypePayload
+  createProperty(input: createPropertyInput): createPropertyPayload
+  updateProperty(input: updatePropertyInput): updatePropertyPayload
+  deleteProperty(input: deletePropertyInput): deletePropertyPayload
+  updateService(input: updateServiceInput): updateServicePayload
+  deleteService: deleteServicePayload
+  updateSocial(input: updateSocialInput): updateSocialPayload
+  deleteSocial: deleteSocialPayload
+  createSubCategory(input: createSubCategoryInput): createSubCategoryPayload
+  updateSubCategory(input: updateSubCategoryInput): updateSubCategoryPayload
+  deleteSubCategory(input: deleteSubCategoryInput): deleteSubCategoryPayload
+  createTag(input: createTagInput): createTagPayload
+  updateTag(input: updateTagInput): updateTagPayload
+  deleteTag(input: deleteTagInput): deleteTagPayload
+  createWriter(input: createWriterInput): createWriterPayload
+  updateWriter(input: updateWriterInput): updateWriterPayload
+  deleteWriter(input: deleteWriterInput): deleteWriterPayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

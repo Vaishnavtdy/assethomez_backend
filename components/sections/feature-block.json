@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_sections_feature_blocks",
+  "info": {
+    "name": "feature_block",
+    "icon": "clone"
+  },
+  "options": {},
+  "attributes": {
+    "featureTile": {
+      "type": "string"
+    },
+    "feature_description": {
+      "type": "text"
+    },
+    "feature_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

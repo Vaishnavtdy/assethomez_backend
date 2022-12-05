@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_sections_testimonials",
+  "info": {
+    "name": "testimonial",
+    "icon": "chalkboard-teacher",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "client_name": {
+      "type": "string"
+    },
+    "testimonial_caption": {
+      "type": "string"
+    },
+    "testimonial_description": {
+      "type": "richtext"
+    },
+    "testimonial_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "client_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

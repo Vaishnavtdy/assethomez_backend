@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "socials",
+  "info": {
+    "name": "social",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

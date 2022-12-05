@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "property_listings",
+  "info": {
+    "name": "property_listing",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "property_type": {
+      "type": "string",
+      "required": true
+    },
+    "property_location": {
+      "type": "string",
+      "required": true
+    },
+    "development_name": {
+      "type": "string"
+    },
+    "number_of_beds": {
+      "type": "integer"
+    },
+    "number_of_bathrooms": {
+      "type": "integer"
+    },
+    "area": {
+      "type": "integer"
+    },
+    "fullname": {
+      "type": "string",
+      "required": true
+    },
+    "emailid": {
+      "type": "string",
+      "required": true
+    },
+    "mobile": {
+      "type": "string",
+      "required": true
+    },
+    "office_number": {
+      "type": "string"
+    },
+    "passport": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "title_deed": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "floor_plan": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

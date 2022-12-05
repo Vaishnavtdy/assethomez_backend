@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "property_statuses",
+  "info": {
+    "name": "property_status",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "properties": {
+      "via": "property_status",
+      "collection": "property"
+    }
+  }
+}

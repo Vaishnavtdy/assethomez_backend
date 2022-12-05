@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_sections_meetourteams",
+  "info": {
+    "name": "meetourteam",
+    "icon": "circle-notch",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "membername": {
+      "type": "string"
+    },
+    "memberposition": {
+      "type": "string"
+    },
+    "memberdescription": {
+      "type": "richtext"
+    },
+    "linkedin_profile": {
+      "type": "string"
+    },
+    "twitter_profile": {
+      "type": "string"
+    },
+    "facebook_profile": {
+      "type": "string"
+    },
+    "memberimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

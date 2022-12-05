@@ -1,0 +1,182 @@
+{
+  "kind": "singleType",
+  "collectionName": "homes",
+  "info": {
+    "name": "home",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slidertitle": {
+      "type": "string",
+      "required": true
+    },
+    "sliderdescription": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "areaguide_title": {
+      "type": "string"
+    },
+    "about_title": {
+      "type": "string"
+    },
+    "about_description": {
+      "type": "richtext"
+    },
+    "aboutBtn_title": {
+      "type": "string"
+    },
+    "aboutBtn_link": {
+      "type": "string"
+    },
+    "about_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "service_title": {
+      "type": "string",
+      "required": true
+    },
+    "servicesBtn_title": {
+      "type": "string"
+    },
+    "servicesBtn_link": {
+      "type": "string"
+    },
+    "propertysale_tltle": {
+      "type": "string"
+    },
+    "propertysale_description": {
+      "type": "text"
+    },
+    "propertysaleBtn_title": {
+      "type": "string"
+    },
+    "propertysaleBtn_link": {
+      "type": "string"
+    },
+    "propertyrent_title": {
+      "type": "string"
+    },
+    "propertyrent_description": {
+      "type": "text"
+    },
+    "propertyrentBtn_title": {
+      "type": "string"
+    },
+    "propertyrentBtn_link": {
+      "type": "string"
+    },
+    "testimonial_title": {
+      "type": "string"
+    },
+    "testimonial": {
+      "type": "component",
+      "repeatable": true,
+      "component": "sections.testimonial"
+    },
+    "newstitle": {
+      "type": "string"
+    },
+    "newsBtn_title": {
+      "type": "string"
+    },
+    "newsBtn_link": {
+      "type": "string"
+    },
+    "mortgage_title": {
+      "type": "string"
+    },
+    "mortgageimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "consultation_title": {
+      "type": "string"
+    },
+    "consultation_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "offer_title": {
+      "type": "string"
+    },
+    "offer_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "currency_title": {
+      "type": "string"
+    },
+    "currency_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "feature_block": {
+      "type": "component",
+      "repeatable": true,
+      "component": "sections.feature-block"
+    },
+    "partners_title": {
+      "type": "string"
+    },
+    "partners_logo": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "sliderimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

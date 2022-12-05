@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_social_medias",
+  "info": {
+    "name": "social_media",
+    "icon": "desktop"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
